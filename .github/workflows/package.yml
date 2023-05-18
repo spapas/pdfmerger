@@ -27,13 +27,16 @@ jobs:
       - name: Package dir
         run: pyinstaller -F -w pdfmerger.py --additional-hooks-dir=.  --onedir --noconsole
       - uses: vimtor/action-zip@v1
+        name: Zip the directory release
         with:
           files: dist/pdfmerger
           dest: pdfmerger.zip
       - name: Package exe
         run: pyinstaller -F -w pdfmerger.py --additional-hooks-dir=.  --onefile --noconsole
       - uses: ncipollo/release-action@v1
+        name: Publish Release
         with:
+          token: ${{secrets.GITHUB_TOKEN}}
           artifacts: "pdfmerger.zip,dist/pdfmerger.exe"
           
       
