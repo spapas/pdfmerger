@@ -35,11 +35,11 @@ jobs:
           dest: pdfmerger.zip
       - name: Package exe
         run: pyinstaller -F -w pdfmerger.py --additional-hooks-dir=.  --onefile --noconsole
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v3
         with:
           name: pdfmerger.zip
           path: ${{ github.workspace }}/pdfmerger.zip
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v3
         with:
           name: pdfmerger.exe
           path: ${{ github.workspace }}/dist/pdfmerger.exe
@@ -48,7 +48,7 @@ jobs:
         name: Publish Release
         with:
           token: ${{secrets.GITHUB_TOKEN}}
-          artifacts: "pdfmerger.zip"
+          artifacts: "pdfmerger.zip,pdfmerger.exe"
           
       
       #- name: Upload pytest test results
