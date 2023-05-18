@@ -6,9 +6,9 @@ from tkinter.messagebox import showinfo
 from tkinterdnd2 import DND_FILES, TkinterDnD
 
 root = TkinterDnD.Tk()  # notice - use this instead of tk.Tk()
-root.geometry("800x600")
+root.geometry("800x400")
 root.title("PDF Merger")
-root.maxsize(800, 800)
+root.maxsize(800, 400)
 
 pdf_filetypes = (("PDF files", "*.pdf"), )
 
@@ -18,7 +18,6 @@ def drop_files(event):
     for f in filenames:
         if f.lower().endswith(".pdf"):
             lb.insert(tk.END, f)
-
 
 class DragDropListbox(tk.Listbox):
     """A Tkinter listbox with drag'n'drop reordering of entries."""
@@ -47,14 +46,32 @@ class DragDropListbox(tk.Listbox):
             self.curIndex = i
 
 
+
 lb = DragDropListbox(root, width=100)
 lb.grid(row=0, column=0, padx=5, pady=5, rowspan=3)
-tk.Label(root, text="Drop PDFs here", font=("Helvetica", 16)).grid(
-    row=3, column=0, padx=5, pady=5
-)
 lb.drop_target_register(DND_FILES)
 lb.dnd_bind("<<Drop>>", drop_files)
 
+tk.Label(root, text="Drop PDFs here", font=("Helvetica", 15)).grid(
+    row=3, column=0, padx=5, pady=5
+)
+tk.Label(root, text="""
+A simple tool to merge PDFs. Open your PDFs using the "Open Files" button or drag n drop 
+them directly to the list box. You can change the merge ordering but dragging the files up
+and down.
+
+When you are ready, press the "Merge PDFs" button and select the output file.
+
+""", 
+        justify=tk.LEFT, anchor='e', font=("Helvetica", 11)).grid(
+    row=4, column=0, padx=5, pady=15
+)
+
+sb = tk.Scrollbar(root, orient=tk.VERTICAL)
+sb.grid(row=0, column=1, padx=5, pady=0, rowspan=3, sticky='ns')
+
+lb.config(yscrollcommand=sb.set)
+sb.config(command=lb.yview)
 
 def select_files():
     filenames = fd.askopenfilenames(
@@ -63,7 +80,6 @@ def select_files():
 
     for f in filenames:
         lb.insert(tk.END, f)
-
 
 def merge_pdfs():
     items = lb.get(0, tk.END)
@@ -97,10 +113,10 @@ def merge_pdfs():
 
 
 open_button = ttk.Button(root, text="Open Files", command=select_files)
-open_button.grid(row=0, column=1, padx=5, pady=5)
+open_button.grid(row=0, column=2, padx=5, pady=5)
 
 merge_button = ttk.Button(root, text="Merge PDFs", command=merge_pdfs)
-merge_button.grid(row=1, column=1, padx=5, pady=5)
+merge_button.grid(row=1, column=2, padx=5, pady=5)
 
 
 def clear_listbox():
@@ -108,6 +124,6 @@ def clear_listbox():
 
 
 clear_button = ttk.Button(root, text="Clear selection", command=clear_listbox)
-clear_button.grid(row=2, column=1, padx=5, pady=5)
+clear_button.grid(row=2, column=2, padx=5, pady=5)
 
 root.mainloop()
