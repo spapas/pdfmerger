@@ -46,7 +46,7 @@ jobs:
         name: Publish Release
         with:
           token: ${{secrets.GITHUB_TOKEN}}
-          artifacts: "pdfmerger.zip,dist/pdfmerger.exe"
+          artifacts: "dist/pdfmerger.exe"
           
       
       #- name: Upload pytest test results
