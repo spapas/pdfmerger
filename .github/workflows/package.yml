@@ -42,11 +42,11 @@ jobs:
           name: Upload pdf merger.zip
           path: ${{ github.workspace }}/dist/pdfmerger.exe
       
-      - uses: ncipollo/release-action@v1
-        name: Publish Release
-        with:
-          token: ${{secrets.GITHUB_TOKEN}}
-          artifacts: "dist/pdfmerger.exe"
+      #- uses: ncipollo/release-action@v1
+      #  name: Publish Release
+      #  with:
+      #    token: ${{secrets.GITHUB_TOKEN}}
+      #    artifacts: "dist/pdfmerger.exe"
           
       
       #- name: Upload pytest test results
