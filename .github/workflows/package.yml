@@ -33,6 +33,15 @@ jobs:
           dest: pdfmerger.zip
       - name: Package exe
         run: pyinstaller -F -w pdfmerger.py --additional-hooks-dir=.  --onefile --noconsole
+      - uses: actions/upload-artifact@v1
+          with:
+            name: Upload pdf merger.zip
+            path: ${{ github.workspace }}/pdfmerger.zip
+      - uses: actions/upload-artifact@v1
+          with:
+            name: Upload pdf merger.zip
+            path: ${{ github.workspace }}/dist/pdfmerger.exe
+      
       - uses: ncipollo/release-action@v1
         name: Publish Release
         with:
