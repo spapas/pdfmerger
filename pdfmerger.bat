@@ -1,1 +1,1 @@
-pyinstaller -F -w pdfmerger.py --additional-hooks-dir=.  --onedir --noconsole
+pyinstaller -F -w pdfmerger.py --additional-hooks-dir=. --collect-data sv_ttk  --noconsole

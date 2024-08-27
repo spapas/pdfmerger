@@ -4,6 +4,8 @@ from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
 from tkinterdnd2 import DND_FILES, TkinterDnD
+import sv_ttk
+
 
 root = TkinterDnD.Tk()  # notice - use this instead of tk.Tk()
 root.geometry("800x400")
@@ -125,5 +127,5 @@ def clear_listbox():
 
 clear_button = ttk.Button(root, text="Clear selection", command=clear_listbox)
 clear_button.grid(row=2, column=2, padx=5, pady=5)
-
+sv_ttk.set_theme("light")    
 root.mainloop()
